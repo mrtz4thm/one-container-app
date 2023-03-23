@@ -1,0 +1,36 @@
+namespace: test-app
+appName: app
+domain: test.demo-k8s.thoma.cloud
+
+deployment:
+  author: "me"
+  replicas: 1
+  commit: ""
+  image: nginx:1.23.3
+  imagePullSecrets: []
+  env: []
+  ports:
+    - name: http-app
+      containerPort: 80
+  resources: {}
+  readinessProbe: {}
+  livenessProbe: {}
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 0
+  extraLabels: {}
+  extraAnnotations: {}
+#---
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: ""
+    kubernetes.io/ingress.class: nginx # if using nginx ingress controller
+  extraRules: []
+#---
+service:
+  ports:
+    - name: service-http
+      port: 80 # nginx default port
+      targetPort: http-app

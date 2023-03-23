@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.appName}}
+  namespace: {{.Values.namespace}}
+  annotations:
+    author: {{.Values.deployment.author}}
+    {{- if .Values.deployment.extraAnnotations}}
+      {{.Values.deployment.extraAnnotations | nindent 4}}
+    {{- end }}
+  {{- if .Values.deployment.extraLabels}}
+  labels:
+    {{.Values.deployment.extraLabels | nindent 4}}
+  {{- end }}
+spec:
+  replicas: {{.Values.deployment.replicas}}
+  strategy: 
+    {{- toYaml .Values.deployment.updateStrategy | nindent 4}}
+  selector:
+    matchLabels:
+      app: {{.Values.appName}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.appName}}
+        commit: {{.Values.deployment.commit}}
+      annotations:
+        author: {{.Values.deployment.author}}
+    spec:
+      containers:
+        - name: {{.Values.appName}}-container
+          image: {{.Values.deployment.image}}
+          {{- if .Values.deployment.env}}
+          env: 
+            {{- toYaml .Values.deployment.env | nindent 12}}
+          {{- end}}
+          ports: 
+            {{- toYaml .Values.deployment.ports | nindent 12}}
+          {{- if .Values.deployment.resources}}
+          resources: 
+            {{- toYaml .Values.deployment.resources | nindent 12}}
+          {{- end}}
+          {{- if .Values.deployment.readinessProbe}}
+          readinessProbe: 
+            {{- toYaml .Values.deployment.readinessProbe | nindent 12}}
+          {{- end}}
+          {{- if .Values.deployment.livenessProbe}}
+          livenessProbe: 
+            {{- toYaml .Values.deployment.livenessProbe | nindent 12}}
+          {{- end}}
+      {{- if .Values.deployment.imagePullSecrets}}
+      imagePullSecrets: 
+        {{- toYaml .Values.deployment.imagePullSecrets | nindent 8}}
+      {{- end}}
+      
+    
