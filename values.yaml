@@ -1,6 +1,6 @@
 namespace: test-app
 appName: app
-domain: test.demo-k8s.thoma.cloud
+domain: ""
 
 deployment:
   author: "me"
