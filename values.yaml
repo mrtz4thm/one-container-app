@@ -9,6 +9,7 @@ deployment:
   image: nginx:1.23.3
   imagePullSecrets: []
   env: []
+  envFrom: []
   ports:
     - name: http-app
       containerPort: 80
