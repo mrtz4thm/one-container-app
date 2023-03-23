@@ -3,12 +3,12 @@ entries:
   one-container-app:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2023-03-23T12:08:58.761232+01:00"
+    created: "2023-03-23T12:49:19.510062+01:00"
     description: A Helm chart for Kubernetes
-    digest: 73ccceb907cdb4839c025df78d41835673dfc06770fab4122de8f8c6d460c486
+    digest: bca6a4384b51bbfb154eaa3cee275614014897b52a8bbdaea7ae08746a50168b
     name: one-container-app
     type: application
     urls:
     - one-container-app-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-23T12:08:58.759806+01:00"
+generated: "2023-03-23T12:49:19.506618+01:00"
